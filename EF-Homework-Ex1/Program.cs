@@ -113,8 +113,9 @@ namespace EF_HomeworkEx1
                     {
                         Inserting.Parameters.AddWithValue("@Name", Product_Name);
                         Inserting.ExecuteNonQuery();
-                        newdb.Close();
+                        
                     }
+                    newdb.Close();
                 }
             }
             catch (Exception ex)
@@ -139,6 +140,7 @@ namespace EF_HomeworkEx1
                         Inserting.Parameters.AddWithValue("@Name", BuyerName);
                         Inserting.ExecuteNonQuery();
                     }
+                    newdb.Close();
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -161,6 +163,7 @@ namespace EF_HomeworkEx1
                     }
 
                     Console.WriteLine($"Купувач {buyerId} купи продукт номер {productId}.");
+                    newdb.Close();
                 }
             }catch (Exception ex) { Console.WriteLine(  ex.Message); }
         }
@@ -185,7 +188,9 @@ namespace EF_HomeworkEx1
                         {
                             Console.WriteLine($"Продукт: {reader["ProductName"]}, Купувачи: {reader["BuyerCount"]}");
                         }
+                       
                     }
+                    newdb.Close();
                 }
 
             }
@@ -208,6 +213,7 @@ namespace EF_HomeworkEx1
                     sqlCommand.ExecuteNonQuery();
                     Console.WriteLine("You deleted database Warehouse");
                 }
+                sqlConnection.Close();
             }
         }
     }
