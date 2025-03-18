@@ -1,0 +1,7 @@
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\bin\Debug\EF-Homework-Ex1.exe.config
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\bin\Debug\EF-Homework-Ex1.exe
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\bin\Debug\EF-Homework-Ex1.pdb
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\obj\Debug\EF-Homework-Ex1.csproj.AssemblyReference.cache
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\obj\Debug\EF-Homework-Ex1.csproj.CoreCompileInputs.cache
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\obj\Debug\EF-Homework-Ex1.exe
+C:\Users\wildr\source\repos\EF-Homework-Ex1\EF-Homework-Ex1\obj\Debug\EF-Homework-Ex1.pdb
