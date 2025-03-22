@@ -27,7 +27,7 @@ namespace EF_HomeworkEx1
             BuyProduct(1, 2);
             BuyProduct(2, 2);
             Query();
-
+            DeleteMainTable(2);
             //Delete();
 
 
@@ -52,7 +52,8 @@ namespace EF_HomeworkEx1
                             Console.WriteLine("Database Warehouse created.");
                         }
                     }
-                };
+                }
+                ;
                 _ConnectionSql = _ConnectionSql + "Database=Warehouse";
                 newdb.Close();
             }
@@ -113,14 +114,14 @@ namespace EF_HomeworkEx1
                     {
                         Inserting.Parameters.AddWithValue("@Name", Product_Name);
                         Inserting.ExecuteNonQuery();
-                        
+
                     }
                     newdb.Close();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error inserting product: {ex.Message}");
+                 Console.WriteLine($"Грешка:{ex.Message}"); 
             }
 
         }
@@ -143,7 +144,7 @@ namespace EF_HomeworkEx1
                     newdb.Close();
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine($"Грешка:{ex.Message}"); }
         }
         public static void BuyProduct(int buyerId, int productId)
         {
@@ -165,7 +166,8 @@ namespace EF_HomeworkEx1
                     Console.WriteLine($"Купувач {buyerId} купи продукт номер {productId}.");
                     newdb.Close();
                 }
-            }catch (Exception ex) { Console.WriteLine(  ex.Message); }
+            }
+            catch (Exception ex) { Console.WriteLine($"Грешка:{ex.Message}"); }
         }
 
         public static void Query()
@@ -188,13 +190,15 @@ namespace EF_HomeworkEx1
                         {
                             Console.WriteLine($"Продукт: {reader["ProductName"]}, Купувачи: {reader["BuyerCount"]}");
                         }
-                       
+
                     }
                     newdb.Close();
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); 
+            catch (Exception ex)
+            {
+                 Console.WriteLine($"Грешка:{ex.Message}"); 
             }
         }
 
@@ -202,19 +206,48 @@ namespace EF_HomeworkEx1
 
         public static void Delete()
         {
-            using (SqlConnection sqlConnection = new SqlConnection(_ConnectionSql))
+            try
             {
-                sqlConnection.Open();
-
-                string Drop = "DROP DATABASE Warehouse;";
-
-                using (SqlCommand sqlCommand = new SqlCommand(Drop, sqlConnection))
+                using (SqlConnection sqlConnection = new SqlConnection(_ConnectionSql))
                 {
-                    sqlCommand.ExecuteNonQuery();
-                    Console.WriteLine("You deleted database Warehouse");
+                    sqlConnection.Open();
+
+                    string Drop = "DROP DATABASE Warehouse;";
+
+                    using (SqlCommand sqlCommand = new SqlCommand(Drop, sqlConnection))
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine("You deleted database Warehouse");
+                    }
+                    sqlConnection.Close();
                 }
-                sqlConnection.Close();
             }
+            catch (Exception ex) { Console.WriteLine($"Грешка:{ex.Message}"); }
+        }
+
+
+        public static void DeleteMainTable(int deleteID)
+        {
+            try
+            {
+
+                using (SqlConnection sqlConnection = new SqlConnection(_ConnectionSql))
+                {
+                    sqlConnection.Open();
+                    string deleterecord = "DELETE FROM Purchases WHERE Id = @DeleteId;";
+
+
+                    using (SqlCommand sqlCommand = new SqlCommand(deleterecord, sqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@DeleteId", deleteID);
+                        sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine($"You delete row {deleteID} ");
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex) { Console.WriteLine($"Грешка:{ex.Message}"); }
         }
     }
 }
